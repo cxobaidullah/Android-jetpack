@@ -1,6 +1,8 @@
 package com.example.firstproject
 
+import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -12,6 +14,9 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -33,16 +38,40 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
 
-            UserList()
+           MainContent()
         }
     }
 }
 
 
 
-
 @Composable
-fun UserList(){
+fun MainContent(){
+    val user =Users(1, "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content")
+val initialUser = remember {
+    mutableStateListOf(user)
+}
+    Box(modifier = Modifier.fillMaxSize()){
+        UserList(users = initialUser)
+        Button(
+            modifier = Modifier
+                .padding(24.dp)
+                .align(alignment = Alignment.BottomCenter),
+            onClick = {
+                try {
+                    initialUser.add(user)
+
+                }catch (e:Exception){
+                   Log.d("error","${e.message}")
+                }
+
+            }) {
+            Text(text = "Add More")
+        }
+    }
+}
+@Composable
+fun UserList(users: List<Users>){
 
         LazyColumn{
             items(users){user ->
@@ -56,7 +85,7 @@ fun UserList(){
 fun DefaultPreview() {
 
         Surface(modifier = Modifier.fillMaxSize()) {
-            UserList()
+            MainContent()
         }
 
 
