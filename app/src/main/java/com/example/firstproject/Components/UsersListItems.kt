@@ -16,10 +16,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.firstproject.DataClasses.Users
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun userListCard(){
+fun userListCard(user:Users){
     val context = LocalContext.current
     Card(
         Modifier
@@ -43,7 +44,7 @@ fun userListCard(){
                     .clip(CircleShape)
             )
             Column(Modifier.padding(10.dp)) {
-                Text(text = stringResource(id = R.string.dummy_text))
+                user?.text?.let { Text(text = it) }
 
                 Button(onClick = {
                     //perfotm button action

@@ -46,17 +46,11 @@ fun UserList(){
 
         LazyColumn{
             items(users){user ->
-                userListCard()
+                userListCard(user)
 
             }
         }
     }
-        
-
-
-
-
-
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
