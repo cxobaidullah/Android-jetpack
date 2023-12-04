@@ -37,56 +37,56 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-
-           MainContent()
+            Navigation()
+//           MainContent()
         }
     }
 }
 
 
-
-@Composable
-fun MainContent(){
-    val user =Users(1, "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content")
-val initialUser = remember {
-    mutableStateListOf(user)
-}
-    Box(modifier = Modifier.fillMaxSize()){
-        UserList(users = initialUser)
-        Button(
-            modifier = Modifier
-                .padding(24.dp)
-                .align(alignment = Alignment.BottomCenter),
-            onClick = {
-                try {
-                    initialUser.add(user)
-
-                }catch (e:Exception){
-                   Log.d("error","${e.message}")
-                }
-
-            }) {
-            Text(text = "Add More")
-        }
-    }
-}
-@Composable
-fun UserList(users: List<Users>){
-
-        LazyColumn{
-            items(users){user ->
-                userListCard(user)
-
-            }
-        }
-    }
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-
-        Surface(modifier = Modifier.fillMaxSize()) {
-            MainContent()
-        }
-
-
-}
+//
+//@Composable
+//fun MainContent(){
+//    val user =Users(1, "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content")
+//val initialUser = remember {
+//    mutableStateListOf(user)
+//}
+//    Box(modifier = Modifier.fillMaxSize()){
+//        UserList(users = initialUser)
+//        Button(
+//            modifier = Modifier
+//                .padding(24.dp)
+//                .align(alignment = Alignment.BottomCenter),
+//            onClick = {
+//                try {
+//                    initialUser.add(user)
+//
+//                }catch (e:Exception){
+//                   Log.d("error","${e.message}")
+//                }
+//
+//            }) {
+//            Text(text = "Add More")
+//        }
+//    }
+//}
+//@Composable
+//fun UserList(users: List<Users>){
+//
+//        LazyColumn{
+//            items(users){user ->
+//                userListCard(user)
+//
+//            }
+//        }
+//    }
+//@Preview(showBackground = true)
+//@Composable
+//fun DefaultPreview() {
+//
+//        Surface(modifier = Modifier.fillMaxSize()) {
+//            MainContent()
+//        }
+//
+//
+//}

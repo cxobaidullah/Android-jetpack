@@ -16,11 +16,14 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import coil.Coil
+import coil.compose.rememberImagePainter
 import com.example.firstproject.DataClasses.Users
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun userListCard(user:Users){
+fun userListCard(user:Users , navController: NavHostController? =null){
     val context = LocalContext.current
     Card(
         Modifier
@@ -36,9 +39,20 @@ fun userListCard(user:Users){
 
 
         ) {
-            Image(painter = painterResource(id = R.drawable.profile),
+//            Image(painter = painterResource(id = R.drawable.profile),
+//                contentDescription = "",
+//                contentScale= ContentScale.Crop,
+//                modifier = Modifier
+//                    .size(120.dp)
+//                    .clip(CircleShape)
+//            )
+
+
+            val painter = rememberImagePainter(data = R.drawable.profile)
+            Image(
+                painter = painter,
                 contentDescription = "",
-                contentScale= ContentScale.Crop,
+                contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .size(120.dp)
                     .clip(CircleShape)
@@ -48,7 +62,8 @@ fun userListCard(user:Users){
 
                 Button(onClick = {
                     //perfotm button action
-                    Toast.makeText(context,"Simplified Coding", Toast.LENGTH_LONG).show()
+                    navController?.navigate("details?user=${user?.text}")
+//                    Toast.makeText(context,"Simplified Coding", Toast.LENGTH_LONG).show()
 
                 }) {
                     Text(text = stringResource(id = R.string.view_profile))
